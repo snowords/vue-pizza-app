@@ -1,15 +1,37 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import axios from 'axios'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import App from './App.vue';
+import { routes } from './routes';
+import axios from 'axios';
 
-Vue.config.productionTip = false
+import { store } from './store/store.js';
 
-axios.defaults.baseURL = 'https://vue-app-db.firebaseio.com/'
+// 配置默认根路径
+axios.defaults.baseURL = 'https://vue-app-db.firebaseio.com/';
+
+// 配置Vue原型 (在任何组件中都可以正常使用axios)
+Vue.prototype.http = axios;
+
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+  routes,
+  mode: 'history',
+  scrollBehavior(to, from, savedPosition) {
+    // return { x:0, y:100 }
+    // return { selector: '.btn'}
+
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  }
+});
 
 new Vue({
+  el: '#app',
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
+});
