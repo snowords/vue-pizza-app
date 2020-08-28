@@ -50,8 +50,6 @@ export default {
           users.push(user);
         }
 
-        // console.log(users)
-
         // 实现过滤
         let result = users.filter(user => {
           return user.email === this.email && user.password === this.password;

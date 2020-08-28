@@ -42,11 +42,6 @@
 </template>
 <script>
 export default {
-  // data(){
-  //   return {
-  //     homeLink:'/'
-  //   }
-  // }
   computed: {
     currentUser() {
       return this.$store.getters.currentUser;
